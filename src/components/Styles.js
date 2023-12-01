@@ -173,19 +173,29 @@ width:100%;
     
 
 const CardStyle = ({ price, icon, percentage, symbol, time, prevPrice }) => {
+  const [integerPart, decimalPart] = price.toString().split('.');
+
+  // Combine the integer part and the first two characters of the decimal part
+  const truncatedPrice = `${integerPart}.${decimalPart.slice(0, 4)}`;
+
+  const [prevIntegerPart, prevDecimalPart] = prevPrice.toString().split('.');
+
+  // Combine the integer part and the first two characters of the decimal part
+  const truncatedPrevPrice = `${prevIntegerPart}.${prevDecimalPart.slice(0, 4)}`;
+
   return (
     <CardContainer>
         <FlexBox>
    <Div> <ImageLogo src={icon}></ImageLogo>
       <Title>{symbol}</Title></Div>
-       <Div><Title>{price}</Title>
+       <Div><Title>{truncatedPrice}</Title>
       <Content>{percentage > 0? <SmallImg src={greenPercent}/>: <SmallImg src={redPercent}/>}{percentage}</Content>
      
       </Div>
     
         </FlexBox>
         <FlexBoxAround>
-      <Content> Price as at {time}</Content><Content>{prevPrice}</Content>
+      <Content> Price as at {time}</Content><Content>{truncatedPrevPrice}</Content>
       </FlexBoxAround>
       
     </CardContainer>
