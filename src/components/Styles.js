@@ -9,12 +9,34 @@ const CardContainer = styled.div`
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   padding: 16px;
   margin: 16px;
+  @media (min-width: 370px) {
+   width:18rem;
+  }
 
+  @media (min-width: 576px) {
+    width:25rem;
+  }
+
+  @media (min-width: 768px) {
+    width:19rem;
+  }
+
+  @media (min-width: 992px) {
+    width:16rem;
+  }
+
+  @media (min-width: 1200px) {
+    width:16rem;
+  }
+  @media (min-width: 1700px) {
+    width:30rem;
+  }
 `;
 
 export const CardWrapper = styled.div`
   display: flex;
   flex-direction: row;
+  justify-content: center;
   @media (max-width: 768px) {
     flex-direction: column;
   }
@@ -62,6 +84,7 @@ const getColumnSize = (col) => css`
 export const Container = styled.div`
   display: flex;
   flex-wrap: wrap;
+  justify-content: center
 `;
 
 export const HeaderContainer = styled.header`
