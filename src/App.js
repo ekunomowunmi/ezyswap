@@ -6,16 +6,18 @@ import { Navigate, Route, Routes } from "react-router-dom";
 import { BrowserRouter as Router } from 'react-router-dom';
 import { LoginPage } from './pages/Login';
 import  Protected  from './components/Protected'
+import { AuthProvider } from './components/AuthContext';
 
 function App() {
   return (
-    <GoogleOAuthProvider clientId="407472887868-9a6lr7idrip6h8cgthsgekl84mo7358q.apps.googleusercontent.com">
+    <AuthProvider>
+       <GoogleOAuthProvider clientId="407472887868-9a6lr7idrip6h8cgthsgekl84mo7358q.apps.googleusercontent.com">
     <Router>
       <Routes>
         <Route path="/" element={<LoginPage />} />
        
         <Route exact path="/dashboard" element={
-         <Protected isLoggedIn={true}>
+         <Protected >
           {/*  if set to false will not be always route back to login, 
           usually would use a dispatch on login for the auth */}
          <Dashboard />
@@ -24,6 +26,7 @@ function App() {
       </Routes>
     </Router>
      </GoogleOAuthProvider>
+    </AuthProvider>
   
   );
 }

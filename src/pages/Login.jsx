@@ -9,9 +9,12 @@ import {
 import { useNavigate } from "react-router-dom";
 import logo from "../assets/logo.svg";
 import bigImage from "../assets/bigimage.jpg";
+import { useAuth } from '../components/AuthContext';
 
 export function LoginPage() {
   const navigate = useNavigate();
+  const { login } = useAuth();
+
   function redirectToDashboard() {
     navigate("/dashboard");
   }
@@ -30,9 +33,8 @@ export function LoginPage() {
         <GoogleLogin
           onSuccess={(credentialResponse) => {
             console.log(credentialResponse);
-            const { idToken, profileObj } = credentialResponse;
-            console.log(idToken, profileObj);
-
+            const { clientId, credential } = credentialResponse;
+            login(clientId, credential);
             redirectToDashboard();
           }}
           onError={() => {
